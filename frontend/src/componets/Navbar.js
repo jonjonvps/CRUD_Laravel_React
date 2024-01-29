@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Navbar() 
+function Navbar()  
 {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary shadow">
@@ -12,16 +12,10 @@ function Navbar()
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link className="nav-link active" to="/">Home</Link>
+                            <Link className="nav-link active" to="/">Users</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/about">About Us</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/contact">Contact Us</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/UsersList">Users</Link>
+                            <Link className="nav-link" to="https://github.com/jonjonvps" target="_blank">My GitHub</Link>
                         </li>
                     </ul>
 

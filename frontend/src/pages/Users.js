@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
 
-function Users() 
-{
+function Users() {
     // States to control loading and user data
     const [loading, setLoading] = useState(true)
     const [users, setUsers] = useState([])
@@ -17,6 +16,43 @@ function Users()
             setLoading(false)
         })
     }, [])
+
+
+    const deleteUser = (e, id) => {
+        e.preventDefault()
+        let confirmDelete = window.confirm('are you sure you want to delete the user?')
+
+        if (confirmDelete) {
+            const thisCliked = e.currentTarget
+            thisCliked.innertext = "Deleting..."
+
+            // Delete request to delete a user
+            axios.delete(`http://127.0.0.1:8000/api/users/delete/${id}`)
+                .then(res => {
+                    alert(res.data.message);
+                    // removing the row from the table
+                    thisCliked.closest("tr").remove()
+                })
+                .catch(function (error) {
+                    /* 
+                        Error handling, including validation errors (status 422) 
+                        and the requested resource was not found (status 404).
+                    */
+                    if (error.response) {
+
+                        if (error.response.status === 500) {
+                            alert(error.response.data)
+                            setLoading(false)
+                            thisCliked.innertext = "Delete"
+                        }
+                        if (error.response.status === 404) {
+                            alert(error.response.data.message)
+                            setLoading(false)
+                        }
+                    }
+                });
+        }
+    }
 
     // If it is still loading, it displays a loading indicator
     if (loading) {
@@ -40,10 +76,10 @@ function Users()
                 <td>{item.age}</td>
                 <td>{item.cellphone}</td>
                 <td>
-                    <Link to="/" className="btn btn-success">Edit</Link>
+                    <Link to={`/UsersList/edit/${item.id}`} className="btn btn-success">Edit</Link>
                 </td>
                 <td>
-                    <button className="btn btn-danger">Delete</button>
+                    <button type="button" onClick={(e) => deleteUser(e, item.id)} className="btn btn-danger">Delete</button>
                 </td>
             </tr>
         )

@@ -1,21 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home.js'
-import About from '../pages/About.js'
-import Contact from '../pages/Contact.js'
 import Users from '../pages/Users.js'
 import UserCreate from '../pages/UserCreate.js'
+import UserEdit from '../pages/UserEdit.js'
 
 function MyRouter()
 {
     return (
         <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/contact' element={<Contact />} />
             {/* Route to the 'User' page */}
-            <Route path='/UsersList' element={<Users/>} />
+            <Route path='/' element={<Users/>} />
+
             {/* Route to the 'UserCreate' page */}
             <Route path='/UsersList/create' element={<UserCreate/>} />
+
+            {/* Route to the 'UserEdit' page */}
+            <Route path='/UsersList/edit/:id' element={<UserEdit/>} />
         </Routes>
     )
 }
