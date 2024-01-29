@@ -66,7 +66,7 @@ class UsersController extends Controller
             'username' => $req->username,
             'first_name' => $req->first_name,
             'last_name' => $req->last_name,
-            'age' => $req->age,
+            'age' => $req->age ?? '', # if null, sends an empty string
             'cellphone' => $req->cellphone,
         ]);
 
